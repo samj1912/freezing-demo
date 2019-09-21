@@ -9,9 +9,9 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 
 setup(
-    name="freezing-demo",
+    name="awesome-mdviewer",
     version="0.0.1",
-    description="A sample Python project to demo PyInstaller",
+    description="A totally awesome markdown viewer!!!",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/samj1912/freezing-demo",
