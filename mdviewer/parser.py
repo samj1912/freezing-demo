@@ -7,7 +7,7 @@ from mdx_gfm import GithubFlavoredMarkdownExtension as GFM
 logger = logging.getLogger(__name__)
 
 try:
-    CSS_STYLE = pkgutil.get_data("mdviewer", "markdown.cssa").decode()
+    CSS_STYLE = pkgutil.get_data("mdviewer", "markdown.css").decode()
 except IOError:
     logger.warning("Unable to import fancy style sheets. Make do with 1980s html you pleb.")
     CSS_STYLE = ""
