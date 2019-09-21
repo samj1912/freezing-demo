@@ -1,0 +1,24 @@
+os: osx
+osx_image: xcode9
+language: generic
+cache:
+  pip: true
+script:
+- "./setup-osx.sh"
+- source venv/bin/activate
+- pip3 install pyinstaller
+- pip3 install .
+- pyinstaller demo.spec
+- pyinstaller md-viewer.spec
+- ./package-osx.sh demo
+- ./package-osx.sh md-viewer
+deploy:
+  provider: releases
+  api_key:
+    secure: uNdnjLpZxwGE30B4cZWelFphToaS5LIowq4e95400bkXpXPVTgu7nb1UFiNVaUfbeViispn8F0N+RsAbSY4Vlu5F2HeZjuQWUEF6q6ghBEhbm1LVUfDD8z7XK4A/3JxEPSKpjn58QFAXDlpPyty2S4YLs0s85Hj9bnlJSwMa/QDDdpi2ColvL6cumaUnPEzmkFdmarQmbDiHqqlkdkvJF9isjSzfsxnHDHBE2wqxJy39YCfQwu/UrI8x99cMs99hLf+UYlamjy4mtXYp8eMtbqMP1iZgO6I4LDs7vUY7/XoKch9Pii0H/akHyt0AGT968ulwSW0m7gturQgUxJiCHrCuvi+xiULNXaS/I7xbVsMoWIqs8wE/n7v2vmPsvzF9LlEl1x9b+mPPRHBN8xAzUx9cgvC7AP8vGVE7BFkmhkcNGPT5B96JkBwbotepXH5b0exkko6cyIDUJSjPMKwdgqxLDRIo+V7RuAp2OwKIJmEUEfoVAn5ClXxlAse59nvKlK28dqZV63/DWPgMj9cH9cQReHWzNx5cpOr1vrCXDvyn0swZP5YJqkIXE3/T2aSd1Lw7YfvCxthPzsfw8WVetk2H7QfU6Qcbav3UGcbIvRKxyFIlBmXIkAJW/0Vkw455kR9TkYflDACsjQ6i/LKdKDizIBXnQ+Lc1TGJdizdNvo=
+  file_glob: true
+  file: dist/*.dmg
+  on:
+    repo: samj1912/freezing-demo
+  draft: true
+  skip_cleanup: true
