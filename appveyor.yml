@@ -20,6 +20,10 @@ build_script:
 - cmd: >-
     pip3 install pyinstaller
 
+    pip3 install .
+
     pyinstaller --noconfirm demo.py --onefile
+
+    pyinstaller --noconfirm md-viewer.spec
 artifacts:
 - path: dist/*.exe
