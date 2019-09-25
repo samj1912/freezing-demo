@@ -1,0 +1,31 @@
+version: 0.0.1.{build}
+pull_requests:
+  do_not_increment_build_number: true
+skip_branch_with_pr: true
+image: Visual Studio 2015
+environment:
+  matrix:
+  - PYTHON: C:\Python37-x64
+    TEST_PIP_INSTALL: true
+init:
+- cmd: >-
+    SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+
+    SET PYTHON_SITE=%PYTHON%\lib\site-packages
+
+    FOR /F "tokens=*" %%a IN ('python -c "import sys;print('%%s.%%s.%%s' %% sys.version_info[0:3])"') do (SET PYTHON_VERSION=%%a)
+
+    ECHO %PYTHON% %PYTHON_VERSION%
+build_script:
+- cmd: >-
+    pip3 install wheel setuptools pywin32 pyinstaller -U
+
+    pip3 install -r requirements.txt
+
+    cythonize -a -i *.pyx
+
+    pyinstaller cython-demo-all.spec
+
+    .\dist\cython-demo.exe
+artifacts:
+- path: dist/*.exe
